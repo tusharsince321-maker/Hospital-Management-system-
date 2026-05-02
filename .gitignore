@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+backend/config/config.env
+backend/tmp
+frontend-admin/.env
+frontend-patient/.env
+

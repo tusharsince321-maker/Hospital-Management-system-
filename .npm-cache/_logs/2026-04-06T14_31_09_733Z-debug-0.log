@@ -1,0 +1,115 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.9.0
+2 info using node@v24.14.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Hospital Mangement system\backend\.npmrc
+5 silly config load:file:C:\Users\tusha\.npmrc
+6 silly config load:file:C:\Users\tusha\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install"
+9 verbose logfile logs-max:10 dir:C:\Hospital Mangement system\.npm-cache\_logs\2026-04-06T14_31_09_733Z-
+10 verbose logfile C:\Hospital Mangement system\.npm-cache\_logs\2026-04-06T14_31_09_733Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest bcryptjs@^2.4.3
+15 silly packumentCache full:https://registry.npmjs.org/bcryptjs cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/bcryptjs 1407ms (cache miss)
+17 silly fetch manifest cloudinary@^2.6.1
+18 silly packumentCache full:https://registry.npmjs.org/cloudinary cache-miss
+19 http fetch GET 200 https://registry.npmjs.org/cloudinary 264ms (cache miss)
+20 silly fetch manifest cookie-parser@^1.4.6
+21 silly packumentCache full:https://registry.npmjs.org/cookie-parser cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/npm 1769ms
+23 http fetch GET 200 https://registry.npmjs.org/cookie-parser 1098ms (cache miss)
+24 silly fetch manifest cors@^2.8.5
+25 silly packumentCache full:https://registry.npmjs.org/cors cache-miss
+26 http fetch GET 200 https://registry.npmjs.org/cors 150ms (cache miss)
+27 silly fetch manifest dotenv@^16.4.5
+28 silly packumentCache full:https://registry.npmjs.org/dotenv cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/dotenv 313ms (cache miss)
+30 silly fetch manifest express@^4.19.2
+31 silly packumentCache full:https://registry.npmjs.org/express cache-miss
+32 http fetch GET 200 https://registry.npmjs.org/express 309ms (cache miss)
+33 silly fetch manifest express-fileupload@^1.5.1
+34 silly packumentCache full:https://registry.npmjs.org/express-fileupload cache-miss
+35 http fetch GET 200 https://registry.npmjs.org/express-fileupload 460ms (cache miss)
+36 silly fetch manifest jsonwebtoken@^9.0.2
+37 silly packumentCache full:https://registry.npmjs.org/jsonwebtoken cache-miss
+38 http fetch GET 200 https://registry.npmjs.org/jsonwebtoken 168ms (cache miss)
+39 silly fetch manifest mongoose@^8.5.4
+40 silly packumentCache full:https://registry.npmjs.org/mongoose cache-miss
+41 http fetch GET 200 https://registry.npmjs.org/mongoose 563ms (cache miss)
+42 silly fetch manifest validator@^13.12.0
+43 silly packumentCache full:https://registry.npmjs.org/validator cache-miss
+44 http fetch GET 200 https://registry.npmjs.org/validator 524ms (cache miss)
+45 silly fetch manifest nodemon@^3.1.4
+46 silly packumentCache full:https://registry.npmjs.org/nodemon cache-miss
+47 http fetch GET 200 https://registry.npmjs.org/nodemon 273ms (cache miss)
+48 silly placeDep ROOT bcryptjs@ OK for: hospital-management-system-backend@1.0.0 want: ^2.4.3
+49 silly placeDep ROOT cloudinary@ OK for: hospital-management-system-backend@1.0.0 want: ^2.6.1
+50 silly placeDep ROOT cookie-parser@ OK for: hospital-management-system-backend@1.0.0 want: ^1.4.6
+51 silly placeDep ROOT cors@ OK for: hospital-management-system-backend@1.0.0 want: ^2.8.5
+52 silly placeDep ROOT dotenv@ OK for: hospital-management-system-backend@1.0.0 want: ^16.4.5
+53 silly placeDep ROOT express@ OK for: hospital-management-system-backend@1.0.0 want: ^4.19.2
+54 silly placeDep ROOT express-fileupload@ OK for: hospital-management-system-backend@1.0.0 want: ^1.5.1
+55 silly placeDep ROOT jsonwebtoken@ OK for: hospital-management-system-backend@1.0.0 want: ^9.0.2
+56 silly placeDep ROOT mongoose@ OK for: hospital-management-system-backend@1.0.0 want: ^8.5.4
+57 silly placeDep ROOT nodemon@ OK for: hospital-management-system-backend@1.0.0 want: ^3.1.4
+58 silly placeDep ROOT validator@ OK for: hospital-management-system-backend@1.0.0 want: ^13.12.0
+59 verbose type system
+60 verbose stack FetchError: Invalid response body while trying to fetch https://registry.npmjs.org/bcryptjs: EPERM: operation not permitted, unlink 'C:\Hospital Mangement system\.npm-cache\_cacache\tmp\1a896b36'
+60 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\body.js:170:15
+60 verbose stack     at async Response.json (C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\body.js:75:17)
+60 verbose stack     at async RegistryFetcher.packument (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:98:25)
+60 verbose stack     at async RegistryFetcher.manifest (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:128:23)
+60 verbose stack     at async #fetchManifest (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1214:20)
+60 verbose stack     at async #nodeFromEdge (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1052:19)
+60 verbose stack     at async #buildDepStep (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:916:11)
+60 verbose stack     at async Arborist.buildIdealTree (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:170:7)
+60 verbose stack     at async Promise.all (index 1)
+60 verbose stack     at async Arborist.reify (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:110:5)
+61 error code EPERM
+62 error syscall unlink
+63 error path C:\Hospital Mangement system\.npm-cache\_cacache\tmp\1a896b36
+64 error errno EPERM
+65 error FetchError: Invalid response body while trying to fetch https://registry.npmjs.org/bcryptjs: EPERM: operation not permitted, unlink 'C:\Hospital Mangement system\.npm-cache\_cacache\tmp\1a896b36'
+65 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\body.js:170:15
+65 error     at async Response.json (C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\body.js:75:17)
+65 error     at async RegistryFetcher.packument (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:98:25)
+65 error     at async RegistryFetcher.manifest (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:128:23)
+65 error     at async #fetchManifest (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1214:20)
+65 error     at async #nodeFromEdge (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1052:19)
+65 error     at async #buildDepStep (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:916:11)
+65 error     at async Arborist.buildIdealTree (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:170:7)
+65 error     at async Promise.all (index 1)
+65 error     at async Arborist.reify (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:110:5) {
+65 error   code: 'EPERM',
+65 error   errno: 'EPERM',
+65 error   syscall: 'unlink',
+65 error   path: 'C:\\Hospital Mangement system\\.npm-cache\\_cacache\\tmp\\1a896b36',
+65 error   type: 'system',
+65 error   requiredBy: '.'
+65 error }
+66 error
+66 error The operation was rejected by your operating system.
+66 error It's possible that the file was already in use (by a text editor or antivirus),
+66 error or that you lack permissions to access it.
+66 error
+66 error If you believe this might be a permissions issue, please double-check the
+66 error permissions of the file and its containing directories, or try running
+66 error the command again as root/Administrator.
+67 silly unfinished npm timer reify 1775485870099
+68 silly unfinished npm timer reify:loadTrees 1775485870099
+69 verbose cwd C:\Hospital Mangement system\backend
+70 verbose os Windows_NT 10.0.26200
+71 verbose node v24.14.0
+72 verbose npm  v11.9.0
+73 notice
+73 notice New minor version of npm available! 11.9.0 -> 11.12.1
+73 notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.1
+73 notice To update run: npm install -g npm@11.12.1
+73 notice  { force: true, Symbol(proc-log.meta): true }
+74 verbose exit 1
+75 verbose code 1
+76 error A complete log of this run can be found in: C:\Hospital Mangement system\.npm-cache\_logs\2026-04-06T14_31_09_733Z-debug-0.log
