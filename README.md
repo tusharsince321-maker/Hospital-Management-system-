@@ -157,3 +157,5 @@ If you don’t have an Admin user yet, set `BOOTSTRAP_ADMIN_KEY` in `backend/con
 - `POST /api/v1/user/admin/bootstrap`
 
 Body includes `bootstrapKey` plus admin fields: `firstName`, `lastName`, `email`, `phone`, `nic`, `dob`, `gender`, `password`.
+
+If an Admin already exists but the password is lost, call the same endpoint with the existing admin email and a new password. The bootstrap key is required, and the endpoint will reset that admin account.

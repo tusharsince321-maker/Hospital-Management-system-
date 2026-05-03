@@ -136,11 +136,6 @@ export const bootstrapAdmin = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid bootstrap key.", 401));
   }
 
-  const existingAdmin = await User.findOne({ role: "Admin" });
-  if (existingAdmin) {
-    return next(new ErrorHandler("Admin already exists. Bootstrap disabled.", 400));
-  }
-
   if (
     !firstName ||
     !lastName ||
@@ -154,15 +149,50 @@ export const bootstrapAdmin = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Please fill full admin form.", 400));
   }
 
-  const existing = await User.findOne({ email });
-  if (existing) {
+  const normalizedEmail = email.toLowerCase();
+  const existingAdmin = await User.findOne({ role: "Admin" });
+  const adminWithEmail = await User.findOne({ email: normalizedEmail, role: "Admin" }).select(
+    "+password"
+  );
+
+  if (existingAdmin && !adminWithEmail) {
+    return next(
+      new ErrorHandler("Admin already exists. Use the existing admin email to reset password.", 400)
+    );
+  }
+
+  if (adminWithEmail) {
+    adminWithEmail.firstName = firstName;
+    adminWithEmail.lastName = lastName;
+    adminWithEmail.phone = phone;
+    adminWithEmail.nic = nic;
+    adminWithEmail.dob = dob;
+    adminWithEmail.gender = gender;
+    adminWithEmail.password = password;
+    await adminWithEmail.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Bootstrap admin reset successfully.",
+      admin: {
+        _id: adminWithEmail._id,
+        firstName: adminWithEmail.firstName,
+        lastName: adminWithEmail.lastName,
+        email: adminWithEmail.email,
+        role: adminWithEmail.role,
+      },
+    });
+  }
+
+  const existingUser = await User.findOne({ email: normalizedEmail });
+  if (existingUser) {
     return next(new ErrorHandler("User already exists with this email.", 400));
   }
 
   const admin = await User.create({
     firstName,
     lastName,
-    email,
+    email: normalizedEmail,
     phone,
     nic,
     dob,
