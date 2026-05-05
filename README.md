@@ -99,6 +99,7 @@ Required backend variables in `backend/config/config.env`:
 - `BOOTSTRAP_ADMIN_KEY`
 - `SYNC_ADMIN_ON_STARTUP`
 - `SYNC_ADMIN_PASSWORD`
+- `SYNC_ADMIN_FORCE`
 - `ADMIN_EMAIL`
 - `ADMIN_PASSWORD`
 - `PORT`
@@ -174,3 +175,5 @@ If the deployed admin login says "Invalid email or password" and you cannot use 
 - `ADMIN_PASSWORD=password123`
 
 On startup, the backend will create that admin if missing, or reset that admin password if the email already exists. Turn `SYNC_ADMIN_ON_STARTUP` back to `false` after login is recovered.
+
+The startup recovery runs once per admin email and records that in MongoDB, so leaving the env var enabled by accident will not keep resetting the password on every restart. To intentionally run it again later, temporarily set `SYNC_ADMIN_FORCE=true`, redeploy, then set it back to `false`.

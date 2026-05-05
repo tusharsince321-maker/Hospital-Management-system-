@@ -1,4 +1,5 @@
 import { User } from "../models/userSchema.js";
+import { SystemSetting } from "../models/systemSettingSchema.js";
 
 const getAdminData = (prefix) => ({
   firstName: process.env[`${prefix}_ADMIN_FIRSTNAME`] || "Admin",
@@ -63,8 +64,23 @@ export const syncStartupAdmin = async () => {
     role: "Admin",
   };
 
+  const syncKey = `startup-admin-sync:${adminData.email}`;
+  const alreadyCompleted = await SystemSetting.findOne({ key: syncKey });
+  const forceSync = process.env.SYNC_ADMIN_FORCE === "true";
+
+  if (alreadyCompleted && !forceSync) {
+    console.log(`Startup admin sync already completed for ${adminData.email}`);
+    return;
+  }
+
   await upsertAdmin(adminData, {
     label: "startup admin",
     resetPassword: process.env.SYNC_ADMIN_PASSWORD === "true",
   });
+
+  await SystemSetting.findOneAndUpdate(
+    { key: syncKey },
+    { value: "completed" },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  );
 };
