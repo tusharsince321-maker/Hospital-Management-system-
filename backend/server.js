@@ -4,7 +4,7 @@ import "./setupEnv.js";
 import cloudinary from "cloudinary";
 import app from "./app.js";
 import { connectDB } from "./database/dbConnection.js";
-import { createDevAdmin } from "./utils/createDevAdmin.js";
+import { createDevAdmin, syncStartupAdmin } from "./utils/createDevAdmin.js";
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -15,6 +15,7 @@ cloudinary.v2.config({
 try {
   await connectDB();
   if (process.env.NODE_ENV === "development") await createDevAdmin();
+  await syncStartupAdmin();
 } catch (err) {
   console.error("Failed to initialize server components:", err?.message || err);
   process.exit(1);

@@ -97,6 +97,10 @@ Required backend variables in `backend/config/config.env`:
 - `JWT_EXPIRES`
 - `COOKIE_EXPIRE`
 - `BOOTSTRAP_ADMIN_KEY`
+- `SYNC_ADMIN_ON_STARTUP`
+- `SYNC_ADMIN_PASSWORD`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
 - `PORT`
 - `NODE_ENV`
 - `FRONTEND_URL`
@@ -159,3 +163,14 @@ If you don’t have an Admin user yet, set `BOOTSTRAP_ADMIN_KEY` in `backend/con
 Body includes `bootstrapKey` plus admin fields: `firstName`, `lastName`, `email`, `phone`, `nic`, `dob`, `gender`, `password`.
 
 If an Admin already exists but the password is lost, call the same endpoint with the existing admin email and a new password. The bootstrap key is required, and the endpoint will reset that admin account.
+
+## Render Admin Recovery
+
+If the deployed admin login says "Invalid email or password" and you cannot use the bootstrap key, set these Render environment variables and redeploy:
+
+- `SYNC_ADMIN_ON_STARTUP=true`
+- `SYNC_ADMIN_PASSWORD=true`
+- `ADMIN_EMAIL=admin@example.com`
+- `ADMIN_PASSWORD=password123`
+
+On startup, the backend will create that admin if missing, or reset that admin password if the email already exists. Turn `SYNC_ADMIN_ON_STARTUP` back to `false` after login is recovered.
