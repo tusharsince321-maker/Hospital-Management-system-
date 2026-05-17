@@ -12,6 +12,10 @@ const statusStyles = (status) => {
   return "bg-yellow-100 text-yellow-700 border-yellow-200";
 };
 
+const suggestedDate = (appointment) => appointment.doctorSuggestedDate || appointment.doctor_response_date || "";
+const suggestedTime = (appointment) => appointment.doctorSuggestedTime || appointment.doctor_response_time || "";
+const suggestedMessage = (appointment) => appointment.doctorMessage || appointment.doctor_message || "";
+
 const MyAppointments = () => {
   const [loading, setLoading] = useState(true);
   const [appointments, setAppointments] = useState([]);
@@ -109,17 +113,17 @@ const MyAppointments = () => {
                     </div>
 
                     <div className="space-y-3 md:col-span-1">
-                      {a.status === "Accepted" && a.doctor_response_date ? (
+                      {a.status === "Accepted" && suggestedDate(a) ? (
                         <div className="rounded-3xl border border-green-100 bg-green-50 px-4 py-3 text-sm text-slate-700">
                           <div className="font-semibold text-green-700">Doctor scheduled</div>
-                          <div>Date: {new Date(a.doctor_response_date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</div>
-                          <div>Time: {a.doctor_response_time}</div>
+                          <div>Date: {new Date(suggestedDate(a)).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</div>
+                          <div>Time: {suggestedTime(a)}</div>
                         </div>
                       ) : null}
-                      {a.doctor_message ? (
+                      {suggestedMessage(a) ? (
                         <div className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
                           <div className="font-semibold text-slate-800">Doctor note</div>
-                          <div>{a.doctor_message}</div>
+                          <div>{suggestedMessage(a)}</div>
                         </div>
                       ) : null}
                     </div>
@@ -145,5 +149,4 @@ const MyAppointments = () => {
 };
 
 export default MyAppointments;
-
 

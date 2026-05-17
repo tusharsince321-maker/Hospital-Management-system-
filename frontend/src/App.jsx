@@ -18,6 +18,7 @@ import Doctors from "./pages/Doctors";
 
 // Admin Pages
 import AdminDashboard from "./pages/admin/Dashboard";
+import AdminAnalytics from "./pages/admin/Analytics";
 import AdminAppointments from "./pages/admin/Appointments";
 import AdminDoctors from "./pages/admin/Doctors";
 import AdminAddDoctor from "./pages/admin/AddDoctor";
@@ -66,6 +67,14 @@ const App = () => {
           element={
             <AdminProtectedRoute>
               <AdminAppointments />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="analytics"
+          element={
+            <AdminProtectedRoute>
+              <AdminAnalytics />
             </AdminProtectedRoute>
           }
         />
@@ -166,4 +175,3 @@ const App = () => {
 };
 
 export default App;
-

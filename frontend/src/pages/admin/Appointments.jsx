@@ -13,6 +13,10 @@ const statusPill = (status) => {
   return "bg-yellow-50 text-yellow-700 ring-yellow-200";
 };
 
+const suggestedDate = (appointment) => appointment.doctorSuggestedDate || appointment.doctor_response_date || "";
+const suggestedTime = (appointment) => appointment.doctorSuggestedTime || appointment.doctor_response_time || "";
+const suggestedMessage = (appointment) => appointment.doctorMessage || appointment.doctor_message || "";
+
 const Appointments = () => {
   const { role } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -64,12 +68,12 @@ const Appointments = () => {
   };
 
   const acceptAppointment = async (id) => {
-    const { doctor_response_date, doctor_response_time } = scheduleInputs[id] || {};
-    if (!doctor_response_date || !doctor_response_time) {
+    const { doctorSuggestedDate, doctorSuggestedTime } = scheduleInputs[id] || {};
+    if (!doctorSuggestedDate || !doctorSuggestedTime) {
       toast.error("Please select a scheduled date and time before accepting.");
       return;
     }
-    await updateStatus(id, "Accepted", { doctor_response_date, doctor_response_time });
+    await updateStatus(id, "Accepted", { doctorSuggestedDate, doctorSuggestedTime });
   };
 
   const rejectAppointment = async (id) => {
@@ -139,12 +143,12 @@ const Appointments = () => {
                     </span>
                   </div>
                 </div>
-                {a.status === "Accepted" && a.doctor_response_date ? (
+                {a.status === "Accepted" && suggestedDate(a) ? (
                   <div className="mt-3 rounded-3xl border border-green-100 bg-green-50 p-4 text-sm text-slate-700">
                     <div className="font-semibold text-green-700">Scheduled for Patient</div>
-                    <div>Doctor date: {a.doctor_response_date}</div>
-                    <div>Doctor time: {a.doctor_response_time}</div>
-                    {a.doctor_message ? <div>Note: {a.doctor_message}</div> : null}
+                    <div>Doctor date: {suggestedDate(a)}</div>
+                    <div>Doctor time: {suggestedTime(a)}</div>
+                    {suggestedMessage(a) ? <div>Note: {suggestedMessage(a)}</div> : null}
                   </div>
                 ) : null}
 
@@ -154,8 +158,8 @@ const Appointments = () => {
                       <label className="block text-sm font-medium text-slate-600">Scheduled Date</label>
                       <input
                         type="date"
-                        value={scheduleInputs[a._id]?.doctor_response_date || ""}
-                        onChange={setScheduleField(a._id, "doctor_response_date")}
+                        value={scheduleInputs[a._id]?.doctorSuggestedDate || suggestedDate(a)}
+                        onChange={setScheduleField(a._id, "doctorSuggestedDate")}
                         className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-600"
                       />
                     </div>
@@ -163,8 +167,8 @@ const Appointments = () => {
                       <label className="block text-sm font-medium text-slate-600">Scheduled Time</label>
                       <input
                         type="time"
-                        value={scheduleInputs[a._id]?.doctor_response_time || ""}
-                        onChange={setScheduleField(a._id, "doctor_response_time")}
+                        value={scheduleInputs[a._id]?.doctorSuggestedTime || suggestedTime(a)}
+                        onChange={setScheduleField(a._id, "doctorSuggestedTime")}
                         className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-600"
                       />
                     </div>

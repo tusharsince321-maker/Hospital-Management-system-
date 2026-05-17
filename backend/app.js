@@ -4,6 +4,7 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import path from "path";
 
+import analyticsRouter from "./routes/analyticsRouter.js";
 import appointmentRouter from "./routes/appointmentRouter.js";
 import messageRouter from "./routes/messageRouter.js";
 import userRouter from "./routes/userRouter.js";
@@ -51,6 +52,7 @@ app.get("/health", (req, res) => {
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/appointment", appointmentRouter);
 app.use("/api/v1/message", messageRouter);
+app.use("/api/v1/analytics", analyticsRouter);
 
 if (process.env.NODE_ENV === "production") {
   const distPath = path.resolve("../frontend/dist");

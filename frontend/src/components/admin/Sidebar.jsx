@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaCalendarCheck, FaEnvelopeOpenText, FaPlus, FaUserMd } from "react-icons/fa";
+import { FaBrain, FaCalendarCheck, FaEnvelopeOpenText, FaPlus, FaUserMd } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 
 import { useAuth } from "../../state/AuthContext";
@@ -34,6 +34,9 @@ const Sidebar = () => {
           </NavLink>
           <NavLink to="/admin/appointments" className={linkClass}>
             <FaCalendarCheck /> Appointments
+          </NavLink>
+          <NavLink to="/admin/analytics" className={linkClass}>
+            <FaBrain /> ML Analytics
           </NavLink>
 
           {role === "Admin" ? (

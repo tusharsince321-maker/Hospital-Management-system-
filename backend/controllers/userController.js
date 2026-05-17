@@ -15,7 +15,6 @@ const clearAuthCookie = (res, tokenName) => {
     secure: isSecure,
     sameSite,
     path: "/",
-    expires: new Date(0),
   });
 };
 

@@ -73,7 +73,18 @@ export const getAllAppointments = catchAsyncErrors(async (req, res) => {
 
 export const updateAppointmentStatus = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
-  const { status, doctor_response_date, doctor_response_time, doctor_message } = req.body;
+  const {
+    status,
+    doctorSuggestedDate,
+    doctorSuggestedTime,
+    doctorMessage,
+    doctor_response_date,
+    doctor_response_time,
+    doctor_message,
+  } = req.body;
+  const scheduledDate = doctorSuggestedDate || doctor_response_date;
+  const scheduledTime = doctorSuggestedTime || doctor_response_time;
+  const message = doctorMessage || doctor_message;
 
   if (!status) return next(new ErrorHandler("Status is required.", 400));
   if (!["Pending", "Accepted", "Rejected"].includes(status)) {
@@ -88,23 +99,23 @@ export const updateAppointmentStatus = catchAsyncErrors(async (req, res, next) =
   }
 
   appointment.status = status;
-  appointment.doctor_message = doctor_message || appointment.doctor_message || "";
+  appointment.doctorMessage = message || appointment.doctorMessage || "";
 
   if (status === "Accepted") {
     if (req.user.role === "Doctor") {
-      if (!doctor_response_date || !doctor_response_time) {
+      if (!scheduledDate || !scheduledTime) {
         return next(new ErrorHandler("Please provide your suggested date and time for accepted appointments.", 400));
       }
-      appointment.doctor_response_date = doctor_response_date;
-      appointment.doctor_response_time = doctor_response_time;
+      appointment.doctorSuggestedDate = scheduledDate;
+      appointment.doctorSuggestedTime = scheduledTime;
     }
     if (req.user.role === "Admin") {
-      if (doctor_response_date) appointment.doctor_response_date = doctor_response_date;
-      if (doctor_response_time) appointment.doctor_response_time = doctor_response_time;
+      if (scheduledDate) appointment.doctorSuggestedDate = scheduledDate;
+      if (scheduledTime) appointment.doctorSuggestedTime = scheduledTime;
     }
   } else {
-    appointment.doctor_response_date = "";
-    appointment.doctor_response_time = "";
+    appointment.doctorSuggestedDate = "";
+    appointment.doctorSuggestedTime = "";
   }
 
   await appointment.save();
@@ -133,4 +144,3 @@ export const getMyAppointmentsDoctor = catchAsyncErrors(async (req, res) => {
   });
   res.status(200).json({ success: true, appointments });
 });
-
